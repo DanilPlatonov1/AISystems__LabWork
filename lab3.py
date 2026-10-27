@@ -1,3 +1,4 @@
+import joblib
 import pandas as pd
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor
@@ -13,10 +14,10 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # Шаг 1. Загрузка данных
-X_train = pd.read_csv('X_train_reg.csv')
-X_test = pd.read_csv('X_test_reg.csv')
-y_train = pd.read_csv('y_train_reg.csv').values.ravel()
-y_test = pd.read_csv('y_test_reg.csv').values.ravel()
+X_train = pd.read_csv('models/X_train_reg.csv')
+X_test = pd.read_csv('models/X_test_reg.csv')
+y_train = pd.read_csv('models/y_train_reg.csv').values.ravel()
+y_test = pd.read_csv('models/y_test_reg.csv').values.ravel()
 
 print(f"\nРазмер X_train до удаления: {X_train.shape}")
 print(f"Размер X_test до удаления:  {X_test.shape}")
@@ -94,7 +95,7 @@ xgb_base = XGBRegressor(n_estimators=100, learning_rate=0.1, max_depth=6, random
 xgb_base.fit(X_train, y_train)
 y_pred_xgb_base = xgb_base.predict(X_test)
 r2_xgb_base = r2_score(y_test, y_pred_xgb_base)
-print("-"*60, f"\nXGBoost (базовый) R²: {r2_xgb_base:.3f}")
+print("-"*60,f"\nXGBoost (базовый) R²: {r2_xgb_base:.3f}")
 
 print("\nЗапуск GridSearchCV")
 param_grid = {
@@ -172,3 +173,11 @@ axes[1].set_title('Q-Q plot остатков')
 plt.tight_layout()
 plt.savefig('diograms/residuals_analysis.png')
 plt.show()
+
+
+# Сохранение моделей (Регрессия)
+print("\nСохранение моделей регрессии...")
+joblib.dump(lr, 'models/model_lr_reg.pkl')
+joblib.dump(rf, 'models/model_rf_reg.pkl')
+joblib.dump(xgb_best, 'models/model_xgb_reg.pkl')
+print("Модели регрессии успешно сохранены!")

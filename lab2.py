@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
 from sklearn.feature_selection import VarianceThreshold
@@ -9,7 +8,7 @@ import pickle
 from sklearn.feature_selection import RFE
 from sklearn.linear_model import LogisticRegression
 
-df = pd.read_csv('healthcare-dataset-stroke-data.csv')
+df = pd.read_csv('models/healthcare-dataset-stroke-data.csv')
 
 
 # Шаг 1
@@ -194,10 +193,10 @@ X_test_clf.to_csv('X_test_clf.csv', index=False)
 y_train_clf.to_csv('y_train_clf.csv', index=False)
 y_test_clf.to_csv('y_test_clf.csv', index=False)
 
-with open('scaler_reg.pkl', 'wb') as f:
+with open('models/scaler_reg.pkl', 'wb') as f:
     pickle.dump(scaler_reg, f)
-with open('scaler_clf.pkl', 'wb') as f:
+with open('models/scaler_clf.pkl', 'wb') as f:
     pickle.dump(scaler_clf, f)
-with open('imputer_median.pkl', 'wb') as f:
+with open('models/imputer_median.pkl', 'wb') as f:
     pickle.dump(imputer_median, f)
 print("\nВсе файлы сохранены")

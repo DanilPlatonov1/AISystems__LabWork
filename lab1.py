@@ -2,14 +2,12 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.decomposition import PCA
-from sklearn.preprocessing import StandardScaler, LabelEncoder
 import warnings
 warnings.filterwarnings('ignore')
 
 
 # Шаг 1. Загрузка данных
-df = pd.read_csv('healthcare-dataset-stroke-data.csv')
+df = pd.read_csv('models/healthcare-dataset-stroke-data.csv')
 
 
 # Шаг 2. Информация о данных
